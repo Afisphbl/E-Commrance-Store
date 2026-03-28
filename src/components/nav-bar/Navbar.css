@@ -32,11 +32,18 @@
 .navbar-links > a {
   font-weight: 500;
   color: var(--muted-foreground);
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .navbar-links > a:hover {
   color: var(--foreground);
+}
+
+a.active {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: var(--primary);
+  color: white;
 }
 
 .navbar-search {

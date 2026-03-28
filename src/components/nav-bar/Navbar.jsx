@@ -1,3 +1,5 @@
+import { Link, NavLink } from "react-router";
+import { useTheme } from "../../hooks/useTheme";
 import {
   ChartNoAxesColumn,
   Heart,
@@ -5,12 +7,13 @@ import {
   Moon,
   Search,
   ShoppingCart,
+  Sun,
 } from "lucide-react";
-import { Link } from "react-router";
 
 import "./Navbar.css";
 
 function Navbar() {
+  const { theme, toggleTheme } = useTheme();
   return (
     <div className="navbar-container">
       <div className="container navbar-inner">
@@ -19,9 +22,9 @@ function Navbar() {
         </Link>
 
         <div className="navbar-links">
-          <Link to="/">Home</Link>
-          <Link to="/products">Shop</Link>
-          <Link to="/orders">Order</Link>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/products">Shop</NavLink>
+          <NavLink to="/orders">Order</NavLink>
 
           <div className="navbar-search">
             <input
@@ -37,8 +40,8 @@ function Navbar() {
         </div>
 
         <div className="navbar-actions">
-          <button className="icon-btn nav-icon">
-            <Moon size={20} />
+          <button className="icon-btn nav-icon" onClick={toggleTheme}>
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
 
           <button className="icon-btn nav-icon">
