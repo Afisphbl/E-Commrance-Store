@@ -32,7 +32,7 @@
   transition: transform 0.5s ease;
 }
 
-.product-image {
+:root[data-theme="dark"] .product-image {
   mix-blend-mode: normal;
   background-color: #fff; /* Keep the original background for dummy json images in dark mode */
 }

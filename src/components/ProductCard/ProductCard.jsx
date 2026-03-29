@@ -16,11 +16,19 @@ function ProductCard({
         <img className="product-image" src={image} alt={title} />
 
         <span className="discount-badge">-{discount}%</span>
-        <button className="wishlist-btn">
+        <button
+          type="button"
+          className="wishlist-btn"
+          aria-label="Add to wishlist"
+        >
           <Heart size={16} />
         </button>
 
-        <button className="compare-btn">
+        <button
+          type="button"
+          className="compare-btn"
+          aria-label="Compare product"
+        >
           <ChartNoAxesColumn size={16} />
         </button>
       </div>
@@ -42,7 +50,11 @@ function ProductCard({
             <span className="original-price">{originalPrice}</span>
           </div>
 
-          <button className="add-to-cart-btn">
+          <button
+            type="button"
+            className="add-to-cart-btn"
+            aria-label="Add to cart"
+          >
             <ShoppingCart size={16} />
           </button>
         </div>

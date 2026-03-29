@@ -49,21 +49,21 @@ const categories = [
 
 function Home() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         setLoading(true);
         const data = await fetchProducts();
-        const newProducts = data.products
+        const newProducts = (Array.isArray(data?.products) ? data.products : [])
           .map((product) => {
             return {
               id: product.id,
               brand: product.brand,
               category: product.category,
               description: product.description,
-              discount: Math.round(product.discountPercentage),
+              discount: Math.round(product.discountPercentage ?? 0),
               image: product.thumbnail,
               price: product.price,
               rating: product.rating,
