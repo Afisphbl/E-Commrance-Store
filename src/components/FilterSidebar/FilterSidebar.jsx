@@ -1,6 +1,6 @@
 import "./FilterSidebar.css";
 
-function FilterSidebar({ categories, setCategory }) {
+function FilterSidebar({ categories, selectedCategory, setCategory }) {
   return (
     <section className="filter-sidebar">
       <div className="filter-header">
@@ -17,7 +17,7 @@ function FilterSidebar({ categories, setCategory }) {
               name="filter__product"
               id="all"
               onChange={() => setCategory("all")}
-              defaultChecked
+              defaultChecked={selectedCategory === "all"}
             />
             All Categories
           </label>
@@ -32,6 +32,7 @@ function FilterSidebar({ categories, setCategory }) {
                 name="filter__product"
                 id={category.slug}
                 onChange={() => setCategory(category.slug)}
+                defaultChecked={selectedCategory === category.slug}
               />
               {category.name}
             </label>

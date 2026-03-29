@@ -18,6 +18,7 @@ function Products() {
     categories,
     pagination,
     status,
+    filters,
     fetchIntialData,
     setPage,
     setCategory,
@@ -46,11 +47,17 @@ function Products() {
           className={`sidebar-container ${filterOpen ? "open" : ""}`}
           onClick={(e) => e.stopPropagation()}
         >
-          <FilterSidebar categories={categories} setCategory={setCategory} />
+          <FilterSidebar
+            categories={categories}
+            setCategory={setCategory}
+            selectedCategory={filters.category}
+          />
         </section>
 
         <section className="products-main container">
-          <h1 className="page-title">All Products</h1>
+          <h1 className="page-title">
+            {filters.category === "all" ? "All Products" : filters.category}
+          </h1>
           <div className="products-header">
             <p className="results-count">Showing {products.length} results</p>
 

@@ -126,6 +126,13 @@ export function useProducts() {
           fetch(categoriesUrl),
         ]);
 
+        if (!productsRes.ok) {
+          throw new Error(`Products fetch failed: ${productsRes.status}`);
+        }
+        if (!categoriesRes.ok) {
+          throw new Error(`Categories fetch failed: ${categoriesRes.status}`);
+        }
+
         const productData = await productsRes.json();
         const categoriesData = await categoriesRes.json();
 

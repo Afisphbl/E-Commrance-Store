@@ -26,9 +26,9 @@ function Pagination({ pagination, setPage }) {
       ))}
       <li>
         <button
-          className={`pagination-item ${pagination.currentPage === 13 ? "disabled" : ""}`}
+          className={`pagination-item ${pagination.currentPage === pagination.pageRange ? "disabled" : ""}`}
           onClick={() => setPage(pagination.currentPage + 1)}
-          disabled={pagination.currentPage === 13}
+          disabled={pagination.currentPage === pagination.pageRange}
         >
           <ChevronRight size={16} />
         </button>
