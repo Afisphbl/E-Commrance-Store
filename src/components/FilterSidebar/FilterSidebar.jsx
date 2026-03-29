@@ -1,6 +1,6 @@
 import "./FilterSidebar.css";
 
-function FilterSidebar({ getCategories }) {
+function FilterSidebar({ categories, setCategory }) {
   return (
     <section className="filter-sidebar">
       <div className="filter-header">
@@ -16,18 +16,24 @@ function FilterSidebar({ getCategories }) {
               type="radio"
               name="filter__product"
               id="all"
+              onChange={() => setCategory("all")}
               defaultChecked
             />
             All Categories
           </label>
-          {getCategories.map((category) => (
+          {categories.map((category) => (
             <label
-              htmlFor={category}
-              key={category}
+              htmlFor={category.slug}
+              key={category.slug}
               className="filter-label capitalize"
             >
-              <input type="radio" name="filter__product" id={category} />
-              {category}
+              <input
+                type="radio"
+                name="filter__product"
+                id={category.slug}
+                onChange={() => setCategory(category.slug)}
+              />
+              {category.name}
             </label>
           ))}
         </div>
