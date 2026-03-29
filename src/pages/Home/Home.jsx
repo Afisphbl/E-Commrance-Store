@@ -164,12 +164,12 @@ function Home() {
           <h2>Trending Now</h2>
 
           <Link to="/products" className="view-all-link">
-            <span> View All Products</span>
-            <MoveRight size={16} />
+            <span className="view-all-text"> View All Products</span>
+            <MoveRight size={24} />
           </Link>
         </div>
 
-        <div className="product-grid">
+        <div className="product-grid container">
           {loading
             ? Array(8)
                 .fill(0)

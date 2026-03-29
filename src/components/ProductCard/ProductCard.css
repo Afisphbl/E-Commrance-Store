@@ -115,12 +115,19 @@
   max-width: 1200px;
 }
 
+.product-category-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
 .product-category {
   font-size: 0.75rem;
   text-transform: uppercase;
   color: var(--muted-foreground);
-  margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
+  margin: 0; /* Override any previous margin if merged into single line */
 }
 
 .product-title {
@@ -148,7 +155,6 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  margin-bottom: 1rem;
   font-size: 0.875rem;
   color: var(--muted-foreground);
 }

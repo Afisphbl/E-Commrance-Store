@@ -34,14 +34,16 @@ function ProductCard({
       </div>
 
       <div className="product-content">
-        <p className="product-category">{category}</p>
-        <div className="product-title">
-          <h3>{title}</h3>
+        <div className="product-category-rating">
+          <p className="product-category">{category}</p>
+          <div className="product-rating">
+            <Star size={16} fill="#FFD700" color="#FFD700" />
+            <span>{rating}</span>
+          </div>
         </div>
 
-        <div className="product-rating">
-          <Star size={16} />
-          <span>{rating}</span>
+        <div className="product-title">
+          <h3>{title}</h3>
         </div>
 
         <div className="product-footer ">
