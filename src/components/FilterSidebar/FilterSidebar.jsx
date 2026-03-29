@@ -46,6 +46,7 @@ function FilterSidebar({ getCategories }) {
           min={10}
           max={2000}
         />
+
         <p className="price-range-labels">
           <span>$10</span>
           <span>$2000</span>
