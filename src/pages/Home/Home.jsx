@@ -55,22 +55,22 @@ function Home() {
     const getProducts = async () => {
       try {
         setLoading(true);
-        const data = await fetchProducts();
-        const newProducts = (Array.isArray(data?.products) ? data.products : [])
-          .map((product) => {
-            return {
-              id: product.id,
-              brand: product.brand,
-              category: product.category,
-              description: product.description,
-              discount: Math.round(product.discountPercentage ?? 0),
-              image: product.thumbnail,
-              price: product.price,
-              rating: product.rating,
-              title: product.title,
-            };
-          })
-          .slice(0, 8);
+        const data = await fetchProducts(8);
+        const newProducts = (
+          Array.isArray(data?.products) ? data.products : []
+        ).map((product) => {
+          return {
+            id: product.id,
+            brand: product.brand,
+            category: product.category,
+            description: product.description,
+            discount: Math.round(product.discountPercentage ?? 0),
+            image: product.thumbnail,
+            price: product.price,
+            rating: product.rating,
+            title: product.title,
+          };
+        });
         setProducts(newProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -93,10 +93,10 @@ function Home() {
               your lifestyle today with our exclusive collection.
             </p>
 
-            <button className="hero-cta btn-primary">
+            <Link to="/products" className="hero-cta btn-primary">
               <span>Shop Now</span>
               <MoveRight size={20} />
-            </button>
+            </Link>
           </div>
 
           <div className="hero-image">
