@@ -118,6 +118,29 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <section className="newsletter-section">
+        <div className="newsletter-content">
+          <h2>Join Our Newsletter</h2>
+          <p>
+            Subscribe to get special offers, free giveaways, and
+            once-in-a-lifetime deals.
+          </p>
+        </div>
+
+        <form className="container newsletter-form">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email address"
+          />
+
+          <button type="submit" className="btn-primary">
+            Subscribe
+          </button>
+        </form>
+      </section>
     </div>
   );
 }
