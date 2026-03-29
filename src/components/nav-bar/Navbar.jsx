@@ -8,20 +8,40 @@ import {
   Search,
   ShoppingCart,
   Sun,
+  X,
 } from "lucide-react";
 
 import "./Navbar.css";
+import { useState } from "react";
 
 function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   return (
     <div className="navbar-container">
+      {mobileMenuOpen && (
+        <div
+          className="mobile-backdrop"
+          onClick={() => setMobileMenuOpen(false)}
+        ></div>
+      )}
       <div className="container navbar-inner">
         <Link className="navbar-logo" to="/">
           AfisShop
         </Link>
 
-        <div className="navbar-links">
+        <div className={`navbar-links  ${mobileMenuOpen ? "open" : ""}`}>
+          <div className="mobile-menu-header">
+            <Link className="navbar-logo" to="/">
+              AfisShop
+            </Link>
+            <button
+              className="icon-btn mobile-toggle nav-icon"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <X size={20} />
+            </button>
+          </div>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/products">Shop</NavLink>
           <NavLink to="/orders">Order</NavLink>
@@ -56,7 +76,10 @@ function Navbar() {
             <ShoppingCart size={20} />
           </button>
 
-          <button className="icon-btn mobile-toggle">
+          <button
+            className="icon-btn mobile-toggle nav-icon"
+            onClick={() => setMobileMenuOpen(true)}
+          >
             <Menu size={20} />
           </button>
         </div>
