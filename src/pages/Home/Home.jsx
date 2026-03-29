@@ -1,6 +1,12 @@
+import { useEffect, useState } from "react";
 import { Clock, MoveRight, ShieldCheck, Truck } from "lucide-react";
 import HeroImage from "../../assets/products-img.png";
+import { fetchProducts } from "../../api/productApi";
 import "./Home.css";
+import { Link } from "react-router";
+import { currencyCalculator, formatPrice } from "../../utils/helper";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import Skeleton from "../../components/Skeleton/Skeleton";
 
 const categories = [
   {
@@ -42,6 +48,40 @@ const categories = [
 ];
 
 function Home() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchProducts();
+        const newProducts = data.products
+          .map((product) => {
+            return {
+              id: product.id,
+              brand: product.brand,
+              category: product.category,
+              description: product.description,
+              discount: Math.round(product.discountPercentage),
+              image: product.thumbnail,
+              price: product.price,
+              rating: product.rating,
+              title: product.title,
+            };
+          })
+          .slice(0, 8);
+        setProducts(newProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getProducts();
+  }, []);
+
   return (
     <div className="home-container">
       <header className="hero-section">
@@ -116,6 +156,56 @@ function Home() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="featured-section">
+        <div className="section-header">
+          <h2>Trending Now</h2>
+
+          <Link to="/products" className="view-all-link">
+            <span> View All Products</span>
+            <MoveRight size={16} />
+          </Link>
+        </div>
+
+        <div className="product-grid">
+          {loading
+            ? Array(8)
+                .fill(0)
+                .map((_, i) => (
+                  <div key={i} className="product-skeleton-wrapper">
+                    <Skeleton height="200px" style={{ marginBottom: "1rem" }} />
+                    <Skeleton
+                      height="24px"
+                      width="80%"
+                      style={{ marginBottom: "0.5rem" }}
+                    />
+                    <Skeleton
+                      height="16px"
+                      width="40%"
+                      style={{ marginBottom: "1rem" }}
+                    />
+                    <Skeleton height="40px" width="100%" />
+                  </div>
+                ))
+            : products.map((product) => {
+                const discountedPrice = currencyCalculator(
+                  product.price,
+                  product.discount,
+                );
+                const formattedCurrentPrice = formatPrice(discountedPrice);
+                const formattedOriginalPrice = formatPrice(product.price);
+
+                return (
+                  <ProductCard
+                    key={product.id}
+                    {...product}
+                    currentPrice={formattedCurrentPrice}
+                    originalPrice={formattedOriginalPrice}
+                  />
+                );
+              })}
         </div>
       </section>
 
