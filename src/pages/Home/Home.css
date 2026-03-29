@@ -240,6 +240,15 @@
   box-shadow: var(--shadow-lg);
 }
 
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
 .category-content {
   text-align: center;
   z-index: 2;
@@ -247,7 +256,7 @@
 
 .category-content h3 {
   font-size: 1.5rem;
-  color: var(--foreground);
+  color: white;
   margin-bottom: 0.5rem;
   text-transform: capitalize;
 }
@@ -256,7 +265,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  color: var(--primary);
+  color: red;
   font-size: 0.875rem;
   font-weight: 600;
   opacity: 0;
