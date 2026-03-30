@@ -4,6 +4,7 @@ import { API_BASE_URL, PAGE_SIZE } from "../utils/constant";
 const intialState = {
   products: [],
   categories: [],
+  dummyProductsHolder: [],
 
   status: "idle",
   pagination: {
@@ -16,6 +17,7 @@ const intialState = {
 
   filters: {
     category: "all",
+    price: 2000,
   },
 };
 
@@ -53,6 +55,7 @@ function reducer(state, action) {
         ...state,
         products: newProducts,
         categories: Array.isArray(categories) ? categories : [],
+        dummyProductsHolder: newProducts,
         pagination: {
           ...state.pagination,
           total: total,
@@ -94,6 +97,22 @@ function reducer(state, action) {
       };
     }
 
+    case "SET__PRICE": {
+      const { price } = action.payload;
+      const newProducts = state.products.filter(
+        (product) => product.price <= price,
+      );
+
+      return {
+        ...state,
+        dummyProductsHolder: newProducts,
+        filters: {
+          ...state.filters,
+          price: price,
+        },
+      };
+    }
+
     case "FETCH__ERROR":
       return {
         ...state,
@@ -105,8 +124,10 @@ function reducer(state, action) {
 }
 
 export function useProducts() {
-  const [{ products, categories, status, pagination, filters }, dispatch] =
-    useReducer(reducer, intialState);
+  const [
+    { products, categories, dummyProductsHolder, status, pagination, filters },
+    dispatch,
+  ] = useReducer(reducer, intialState);
 
   const fetchIntialData = useCallback(
     async function fetchIntialData() {
@@ -165,14 +186,23 @@ export function useProducts() {
     });
   }
 
+  function setPrice(price) {
+    dispatch({
+      type: "SET__PRICE",
+      payload: price,
+    });
+  }
+
   return {
     products,
     categories,
+    dummyProductsHolder,
     status,
     pagination,
     filters,
     fetchIntialData,
     setPage,
     setCategory,
+    setPrice,
   };
 }

@@ -14,14 +14,15 @@ import { useProducts } from "../../hooks/useProducts";
 function Products() {
   const [filterOpen, setFilterOpen] = useState(false);
   const {
-    products,
     categories,
+    dummyProductsHolder,
     pagination,
     status,
     filters,
     fetchIntialData,
     setPage,
     setCategory,
+    setPrice,
   } = useProducts();
 
   useEffect(() => {
@@ -51,6 +52,8 @@ function Products() {
             categories={categories}
             setCategory={setCategory}
             selectedCategory={filters.category}
+            setPrice={setPrice}
+            selectedPrice={filters.price}
           />
         </section>
 
@@ -59,7 +62,9 @@ function Products() {
             {filters.category === "all" ? "All Products" : filters.category}
           </h1>
           <div className="products-header">
-            <p className="results-count">Showing {products.length} results</p>
+            <p className="results-count">
+              Showing {dummyProductsHolder.length} results
+            </p>
 
             <div className="sort-container">
               <label htmlFor="sort__products">Sort by:</label>
@@ -100,7 +105,7 @@ function Products() {
             ) : status === "failed" ? (
               <p className="error-message">Failed to fetch products.</p>
             ) : (
-              products.map((product) => {
+              dummyProductsHolder.map((product) => {
                 const discountedPrice = currencyCalculator(
                   product.price,
                   product.discount,
