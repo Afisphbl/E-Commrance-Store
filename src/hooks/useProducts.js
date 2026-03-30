@@ -5,6 +5,7 @@ import { ceilTo } from "../utils/helper";
 const intialState = {
   products: [],
   categories: [],
+  sortedProducts: [],
   dummyProductsHolder: [],
 
   status: "idle",
@@ -19,6 +20,10 @@ const intialState = {
   filters: {
     category: "all",
     price: 2000,
+    sort: {
+      value: "default",
+      order: "",
+    },
   },
 };
 
@@ -129,6 +134,44 @@ function reducer(state, action) {
       };
     }
 
+    case "SET__SORT": {
+      const { value, order } = action.payload;
+
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          sort: {
+            value,
+            order,
+          },
+        },
+      };
+    }
+
+    case "RESET__FILTERS": {
+      return {
+        ...state,
+        dummyProductsHolder: state.products,
+        filters: {
+          ...state.filters,
+          category: "all",
+          price: state.filters.price,
+          sort: {
+            value: "default",
+            order: "",
+          },
+        },
+        pagination: {
+          ...state.pagination,
+          currentPage: 1,
+          skip: 0,
+          total: state.products.length,
+          pageRange: Math.ceil(state.products.length / state.pagination.limit),
+        },
+      };
+    }
+
     case "FETCH__ERROR":
       return {
         ...state,
@@ -154,6 +197,10 @@ export function useProducts() {
 
         if (filters.category !== "all") {
           productURl = `${API_BASE_URL}/products/category/${filters.category}?limit=${pagination.limit}&skip=${pagination.skip}`;
+        }
+
+        if (filters.sort.value !== "default") {
+          productURl = `${API_BASE_URL}/products?sortBy=${filters.sort.value}&order=${filters.sort.order}&limit=${pagination.limit}&skip=${pagination.skip}`;
         }
 
         const categoriesUrl = `${API_BASE_URL}/products/categories`;
@@ -190,7 +237,13 @@ export function useProducts() {
         dispatch({ type: "FETCH__ERROR", payload: error.message });
       }
     },
-    [pagination.limit, pagination.skip, filters.category],
+    [
+      pagination.limit,
+      pagination.skip,
+      filters.category,
+      filters.sort.order,
+      filters.sort.value,
+    ],
   );
 
   function setPage(page) {
@@ -214,6 +267,22 @@ export function useProducts() {
     });
   }
 
+  function setSort(sortValue, sortOrder) {
+    dispatch({
+      type: "SET__SORT",
+      payload: {
+        value: sortValue,
+        order: sortOrder,
+      },
+    });
+  }
+
+  function resetFilters() {
+    dispatch({
+      type: "RESET__FILTERS",
+    });
+  }
+
   return {
     products,
     categories,
@@ -225,5 +294,7 @@ export function useProducts() {
     setPage,
     setCategory,
     setPrice,
+    setSort,
+    resetFilters,
   };
 }
