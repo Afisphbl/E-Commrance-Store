@@ -17,9 +17,10 @@ function ProductCard({
   const isInWishlist = wishlist.some((item) => item.id === id);
   return (
     <div className="product-card">
-      <Link to={`/products/${id}`} className="product-image-wrapper">
-        <img className="product-image" src={image} alt={title} />
-
+      <div className="product-image-wrapper">
+        <Link to={`/products/${id}`}>
+          <img className="product-image" src={image} alt={title} />
+        </Link>
         {discount > 0 && (
           <span className="discount-badge">-{Math.floor(discount)}%</span>
         )}
@@ -47,7 +48,7 @@ function ProductCard({
         >
           <ChartNoAxesColumn size={16} />
         </button>
-      </Link>
+      </div>
 
       <div className="product-content">
         <div className="product-category-rating">

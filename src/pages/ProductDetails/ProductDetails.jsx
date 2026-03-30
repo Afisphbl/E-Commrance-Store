@@ -11,14 +11,18 @@ import {
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../utils/constant";
 import { currencyCalculator, formatPrice } from "../../utils/helper";
+import { useWishlist } from "../../hooks/useWishlist";
 
 function ProductDetails() {
+  const { wishlist, addToWishlist } = useWishlist();
   const [product, setProduct] = useState(null);
   const [imgIndex, setImgIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const isInWishlist = wishlist.some((item) => item.id === +id);
+  console.log(isInWishlist, id);
 
   useEffect(() => {
     async function fetchProductDetails() {
@@ -162,8 +166,18 @@ function ProductDetails() {
             <div className="buttons-group">
               <button className="btn-primary flex-1">Add to Cart</button>
 
-              <button className="btn-wishlist">
-                <Heart size={20} />
+              <button
+                className="btn-wishlist"
+                onClick={() => addToWishlist(product.id)}
+                aria-label={
+                  isInWishlist ? "Remove from wishlist" : "Add to wishlist"
+                }
+              >
+                <Heart
+                  size={20}
+                  fill={isInWishlist ? "#FF0000" : "none"}
+                  color={isInWishlist ? "#FF0000" : "currentColor"}
+                />
               </button>
             </div>
           </div>
