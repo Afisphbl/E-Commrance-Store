@@ -17,12 +17,14 @@ function ProductDetails() {
   const [imgIndex, setImgIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
     async function fetchProductDetails() {
       try {
         setLoading(true);
+        setError(null);
         const response = await fetch(`${API_BASE_URL}/products/${id}`);
         if (!response.ok) throw new Error("Network response was not ok");
 
@@ -52,9 +54,9 @@ function ProductDetails() {
           stock: data.stock ?? 0,
         };
         setProduct(product);
-        console.log(data);
       } catch (error) {
         console.error("Error fetching product details:", error);
+        setError("Unable to load product details. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -65,9 +67,17 @@ function ProductDetails() {
   if (loading)
     return (
       <div className="loading-container">
-        <Loader size={24} className="loading" />;
+        <Loader size={24} className="loading" />
       </div>
     );
+
+  if (error) {
+    return (
+      <div className="error-container">
+        <h2>{error}</h2>
+      </div>
+    );
+  }
   return (
     <section className="product-details-page container">
       <Link to="/products" className="back-link">
@@ -198,7 +208,7 @@ function ReviewCard({ review }) {
   return (
     <div className="review-card">
       <div className="review-header">
-        <div className="review-header">{review.reviewerName}</div>
+        <div className="review-name">{review.reviewerName}</div>
 
         <div className="review-date">
           {new Date(review.date).toLocaleDateString()}

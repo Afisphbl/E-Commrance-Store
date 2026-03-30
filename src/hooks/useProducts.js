@@ -44,7 +44,7 @@ function reducer(state, action) {
             category: product.category,
             description: product.description,
             discount: product.discountPercentage ?? 0,
-            image: product.images?.[0] ?? "",
+            image: product.images?.[0] ?? product.thumbnail ?? "",
             price: product.price,
             rating: product.rating,
             reviews: product.reviews ?? [],
