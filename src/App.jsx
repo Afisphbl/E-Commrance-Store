@@ -4,17 +4,14 @@ import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
 import Navbar from "./components/nav-bar/Navbar";
 import Footer from "./components/Footer/Footer";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/orders" element={<h1>Order</h1>} />
-        </Routes>
+        <AppRoutes />
         <Footer />
       </BrowserRouter>
     </ThemeProvider>

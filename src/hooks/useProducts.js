@@ -198,10 +198,8 @@ export function useProducts() {
           productURl = `${API_BASE_URL}/products/category/${filters.category}?limit=${pagination.limit}&skip=${pagination.skip}`;
         }
 
-        if (filters.sort.value !== "default" && filters.category === "all") {
+        if (filters.sort.value !== "default") {
           productURl = `${API_BASE_URL}/products?sortBy=${filters.sort.value}&order=${filters.sort.order}&limit=${pagination.limit}&skip=${pagination.skip}`;
-        } else {
-          productURl = `${API_BASE_URL}/products/category/${filters.category}?sortBy=${filters.sort.value}&order=${filters.sort.order}&limit=${pagination.limit}&skip=${pagination.skip}`;
         }
 
         const categoriesUrl = `${API_BASE_URL}/products/categories`;
