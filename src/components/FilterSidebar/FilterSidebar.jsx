@@ -1,6 +1,12 @@
 import "./FilterSidebar.css";
 
-function FilterSidebar({ categories, selectedCategory, setCategory }) {
+function FilterSidebar({
+  categories,
+  selectedCategory,
+  selectedPrice,
+  setCategory,
+  setPrice,
+}) {
   return (
     <section className="filter-sidebar">
       <div className="filter-header">
@@ -41,7 +47,7 @@ function FilterSidebar({ categories, selectedCategory, setCategory }) {
 
         <div className="price-header">
           <span>Max Price</span>
-          <p className="price-value">$2000</p>
+          <p className="price-value">${selectedPrice.toFixed(2)}</p>
         </div>
 
         <input
@@ -49,9 +55,10 @@ function FilterSidebar({ categories, selectedCategory, setCategory }) {
           type="range"
           name="price"
           id="price"
-          value={2000}
+          value={selectedPrice}
           min={10}
           max={2000}
+          onChange={(e) => setPrice({ price: parseInt(e.target.value) })}
         />
         <p className="price-range-labels">
           <span>$10</span>
