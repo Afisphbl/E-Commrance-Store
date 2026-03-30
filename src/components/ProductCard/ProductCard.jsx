@@ -14,12 +14,15 @@ function ProductCard({
   originalPrice,
 }) {
   const { wishlist, addToWishlist } = useWishlist();
+  const isInWishlist = wishlist.some((item) => item.id === id);
   return (
     <div className="product-card">
       <Link to={`/products/${id}`} className="product-image-wrapper">
         <img className="product-image" src={image} alt={title} />
 
-        <span className="discount-badge">-{Math.floor(discount)}%</span>
+        {discount > 0 && (
+          <span className="discount-badge">-{Math.floor(discount)}%</span>
+        )}
         <button
           type="button"
           className="wishlist-btn"
@@ -32,12 +35,8 @@ function ProductCard({
         >
           <Heart
             size={16}
-            fill={wishlist.some((item) => item.id === id) ? "#FF0000" : "none"}
-            color={
-              wishlist.some((item) => item.id === id)
-                ? "#FF0000"
-                : "currentColor"
-            }
+            fill={isInWishlist ? "#FF0000" : "none"}
+            color={isInWishlist ? "#FF0000" : "currentColor"}
           />
         </button>
 

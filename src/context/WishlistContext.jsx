@@ -2,15 +2,15 @@ import { createContext, useReducer } from "react";
 import { API_BASE_URL } from "../utils/constant";
 import { currencyCalculator, formatPrice } from "../utils/helper";
 
-export const WishlistContaxt = createContext();
+export const WishlistContext = createContext();
 
 const initialState = {
   wishlist: [],
   removedWishlist: [],
   status: "idle",
+  error: null,
 };
 
-[].findIndex;
 function wishlistReducer(state, action) {
   switch (action.type) {
     case "START":
@@ -21,6 +21,7 @@ function wishlistReducer(state, action) {
         ...state,
         wishlist: [...state.wishlist, action.payload],
         status: "success",
+        error: null,
       };
     }
 
@@ -36,6 +37,7 @@ function wishlistReducer(state, action) {
           ...state.removedWishlist,
           { ...removedItem, isInWishlist: false },
         ],
+        error: null,
       };
     }
 
@@ -49,8 +51,12 @@ function wishlistReducer(state, action) {
         removedWishlist: state.removedWishlist.filter(
           (item) => item.id !== action.payload,
         ),
+        error: null,
       };
     }
+
+    case "ERROR":
+      return { ...state, status: "error", error: action.payload };
 
     default:
       return state;
@@ -119,8 +125,8 @@ export const WishlistProvider = ({ children }) => {
     addToWishlist,
   };
   return (
-    <WishlistContaxt.Provider value={value}>
+    <WishlistContext.Provider value={value}>
       {children}
-    </WishlistContaxt.Provider>
+    </WishlistContext.Provider>
   );
 };

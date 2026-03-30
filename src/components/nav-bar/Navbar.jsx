@@ -44,13 +44,22 @@ function Navbar() {
               <X size={20} />
             </button>
           </div>
-          <NavLink className="nav" to="/">
+          <NavLink
+            className={({ isActive }) => `nav ${isActive ? "active" : ""}`}
+            to="/"
+          >
             Home
           </NavLink>
-          <NavLink className="nav" to="/products">
+          <NavLink
+            className={({ isActive }) => `nav ${isActive ? "active" : ""}`}
+            to="/products"
+          >
             Shop
           </NavLink>
-          <NavLink className="nav" to="/orders">
+          <NavLink
+            className={({ isActive }) => `nav ${isActive ? "active" : ""}`}
+            to="/orders"
+          >
             Order
           </NavLink>
 
