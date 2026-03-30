@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 const Products = lazy(() => import("../pages/Products/Products"));
+const ProductDetails = lazy(
+  () => import("../pages/ProductDetails/ProductDetails"),
+);
 
 function AppRoutes() {
   return (
@@ -11,6 +14,7 @@ function AppRoutes() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/orders" element={<h1>Order</h1>} />
       </Routes>
     </Suspense>
