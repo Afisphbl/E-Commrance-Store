@@ -1,5 +1,6 @@
 import { useCallback, useReducer } from "react";
 import { API_BASE_URL, PAGE_SIZE } from "../utils/constant";
+import { ceilTo } from "../utils/helper";
 
 const intialState = {
   products: [],
@@ -51,6 +52,7 @@ function reducer(state, action) {
       );
 
       const pageRange = Math.ceil(total / state.pagination.limit);
+
       return {
         ...state,
         products: newProducts,
@@ -62,6 +64,10 @@ function reducer(state, action) {
           pageRange: pageRange,
         },
         status: "succeeded",
+        filters: {
+          ...state.filters,
+          price: action.payload.priceCeil ?? state.filters.price,
+        },
       };
     }
 
@@ -103,12 +109,22 @@ function reducer(state, action) {
         (product) => product.price <= price,
       );
 
+      const newTotal = newProducts.length;
+      const newPageRange = Math.ceil(newTotal / state.pagination.limit);
+
       return {
         ...state,
         dummyProductsHolder: newProducts,
         filters: {
           ...state.filters,
           price: price,
+        },
+        pagination: {
+          ...state.pagination,
+          currentPage: 1,
+          skip: 0,
+          total: newTotal,
+          pageRange: newPageRange,
         },
       };
     }
@@ -156,13 +172,18 @@ export function useProducts() {
 
         const productData = await productsRes.json();
         const categoriesData = await categoriesRes.json();
+        const maxPrice = productData?.products?.reduce((max, product) => {
+          return product.price > max ? product.price : max;
+        }, 0);
 
+        const priceCeil = ceilTo(maxPrice, 100);
         dispatch({
           type: "FETCH__SUCCESS",
           payload: {
             products: productData?.products ?? [],
             categories: categoriesData ?? [],
             total: productData?.total ?? 0,
+            priceCeil,
           },
         });
       } catch (error) {
