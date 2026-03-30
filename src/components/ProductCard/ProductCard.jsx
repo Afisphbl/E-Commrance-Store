@@ -1,6 +1,7 @@
 import { ChartNoAxesColumn, Heart, ShoppingCart, Star } from "lucide-react";
 import "./ProductCard.css";
 import { Link } from "react-router";
+import { useWishlist } from "../../hooks/useWishlist";
 
 function ProductCard({
   id,
@@ -12,18 +13,32 @@ function ProductCard({
   currentPrice,
   originalPrice,
 }) {
+  const { wishlist, addToWishlist } = useWishlist();
   return (
     <div className="product-card">
       <Link to={`/products/${id}`} className="product-image-wrapper">
         <img className="product-image" src={image} alt={title} />
 
-        <span className="discount-badge">-{discount}%</span>
+        <span className="discount-badge">-{Math.floor(discount)}%</span>
         <button
           type="button"
           className="wishlist-btn"
           aria-label="Add to wishlist"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            addToWishlist(id);
+          }}
         >
-          <Heart size={16} />
+          <Heart
+            size={16}
+            fill={wishlist.some((item) => item.id === id) ? "#FF0000" : "none"}
+            color={
+              wishlist.some((item) => item.id === id)
+                ? "#FF0000"
+                : "currentColor"
+            }
+          />
         </button>
 
         <button
