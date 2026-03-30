@@ -7,6 +7,7 @@ function FilterSidebar({
   selectedPrice = 2500,
   setCategory,
   setPrice,
+  resetFilters,
 }) {
   return (
     <section className="filter-sidebar">
@@ -23,6 +24,7 @@ function FilterSidebar({
               type="radio"
               name="filter__product"
               id="all"
+              value="all"
               onChange={() => setCategory("all")}
               defaultChecked={selectedCategory === "all"}
             />
@@ -67,7 +69,9 @@ function FilterSidebar({
         </p>
       </div>
 
-      <button className="btn-secondary">Clear Filters</button>
+      <button className="btn-secondary" onClick={resetFilters}>
+        Clear Filters
+      </button>
     </section>
   );
 }

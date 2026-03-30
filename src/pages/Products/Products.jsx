@@ -23,6 +23,8 @@ function Products() {
     setPage,
     setCategory,
     setPrice,
+    setSort,
+    resetFilters,
   } = useProducts();
 
   useEffect(() => {
@@ -50,10 +52,11 @@ function Products() {
         >
           <FilterSidebar
             categories={categories}
-            setCategory={setCategory}
             selectedCategory={filters.category}
-            setPrice={setPrice}
             selectedPrice={filters.price}
+            setCategory={setCategory}
+            setPrice={setPrice}
+            resetFilters={resetFilters}
           />
         </section>
 
@@ -72,9 +75,20 @@ function Products() {
                 name="sor__products"
                 id="sort__products"
                 className="sort-select"
+                value={filters.sort.value}
+                onChange={(e) => {
+                  setSort(
+                    e.target.value,
+                    e.target.options[e.target.selectedIndex].dataset.order,
+                  );
+                }}
               >
                 {SORT_OPTIONS.map((sort) => (
-                  <option key={sort.label} value={sort.value}>
+                  <option
+                    key={sort.label}
+                    value={sort.value}
+                    data-order={sort.order}
+                  >
                     {sort.label}
                   </option>
                 ))}
