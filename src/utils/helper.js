@@ -11,3 +11,7 @@ export const formatPrice = (price) => {
     currency: "USD",
   });
 };
+
+export function ceilTo(value, place) {
+  return Math.ceil(value / place) * place;
+}
