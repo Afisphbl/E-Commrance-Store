@@ -72,7 +72,7 @@ function Home() {
             brand: product.brand,
             category: product.category,
             description: product.description,
-            discount: Math.round(product.discountPercentage ?? 0),
+            discount: product.discountPercentage ?? 0,
             image: product.thumbnail,
             price: product.price,
             rating: product.rating,

@@ -13,10 +13,12 @@ import {
 
 import "./Navbar.css";
 import { useState } from "react";
+import { useWishlist } from "../../hooks/useWishlist";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { wishlist } = useWishlist();
   return (
     <div className="navbar-container">
       {mobileMenuOpen && (
@@ -42,9 +44,24 @@ function Navbar() {
               <X size={20} />
             </button>
           </div>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/products">Shop</NavLink>
-          <NavLink to="/orders">Order</NavLink>
+          <NavLink
+            className={({ isActive }) => `nav ${isActive ? "active" : ""}`}
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => `nav ${isActive ? "active" : ""}`}
+            to="/products"
+          >
+            Shop
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => `nav ${isActive ? "active" : ""}`}
+            to="/orders"
+          >
+            Order
+          </NavLink>
 
           <div className="navbar-search">
             <input
@@ -64,9 +81,12 @@ function Navbar() {
             {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
 
-          <button className="icon-btn nav-icon">
+          <NavLink className="icon-btn nav-icon" to="/wishlist">
             <Heart size={20} />
-          </button>
+            {wishlist.length > 0 && (
+              <span className="badge">{wishlist.length}</span>
+            )}
+          </NavLink>
 
           <button className="icon-btn nav-icon">
             <ChartNoAxesColumn size={20} />

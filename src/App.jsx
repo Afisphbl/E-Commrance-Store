@@ -5,15 +5,18 @@ import Products from "./pages/Products/Products";
 import Navbar from "./components/nav-bar/Navbar";
 import Footer from "./components/Footer/Footer";
 import AppRoutes from "./routes/AppRoutes";
+import { WishlistProvider } from "./context/WishlistContext";
 
 function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <Navbar />
-        <AppRoutes />
-        <Footer />
-      </BrowserRouter>
+      <WishlistProvider>
+        <BrowserRouter>
+          <Navbar />
+          <AppRoutes />
+          <Footer />
+        </BrowserRouter>
+      </WishlistProvider>
     </ThemeProvider>
   );
 }

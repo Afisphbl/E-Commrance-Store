@@ -39,8 +39,11 @@
   color: var(--foreground);
 }
 
-a.active {
+.nav {
   padding: 0.5rem 1rem;
+}
+
+a.active {
   border-radius: 10px;
   background-color: var(--primary);
   color: white;
@@ -105,7 +108,7 @@ a.active {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: var(--primary);
+  background-color: red;
   color: var(--primary-foreground);
   font-size: 0.65rem;
   font-weight: bold;

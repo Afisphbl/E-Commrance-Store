@@ -7,6 +7,7 @@ const Products = lazy(() => import("../pages/Products/Products"));
 const ProductDetails = lazy(
   () => import("../pages/ProductDetails/ProductDetails"),
 );
+const Wishlist = lazy(() => import("../pages/Wishlist/Wishlist"));
 
 function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ function AppRoutes() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/orders" element={<h1>Order</h1>} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </Suspense>
   );
