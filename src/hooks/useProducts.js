@@ -5,7 +5,6 @@ import { ceilTo } from "../utils/helper";
 const intialState = {
   products: [],
   categories: [],
-  sortedProducts: [],
   dummyProductsHolder: [],
 
   status: "idle",
@@ -199,8 +198,10 @@ export function useProducts() {
           productURl = `${API_BASE_URL}/products/category/${filters.category}?limit=${pagination.limit}&skip=${pagination.skip}`;
         }
 
-        if (filters.sort.value !== "default") {
+        if (filters.sort.value !== "default" && filters.category === "all") {
           productURl = `${API_BASE_URL}/products?sortBy=${filters.sort.value}&order=${filters.sort.order}&limit=${pagination.limit}&skip=${pagination.skip}`;
+        } else {
+          productURl = `${API_BASE_URL}/products/category/${filters.category}?sortBy=${filters.sort.value}&order=${filters.sort.order}&limit=${pagination.limit}&skip=${pagination.skip}`;
         }
 
         const categoriesUrl = `${API_BASE_URL}/products/categories`;
