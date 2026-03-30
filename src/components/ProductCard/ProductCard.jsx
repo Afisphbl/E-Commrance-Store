@@ -1,7 +1,9 @@
 import { ChartNoAxesColumn, Heart, ShoppingCart, Star } from "lucide-react";
 import "./ProductCard.css";
+import { Link } from "react-router";
 
 function ProductCard({
+  id,
   image,
   category,
   title,
@@ -12,7 +14,7 @@ function ProductCard({
 }) {
   return (
     <div className="product-card">
-      <div className="product-image-wrapper">
+      <Link to={`/products/${id}`} className="product-image-wrapper">
         <img className="product-image" src={image} alt={title} />
 
         <span className="discount-badge">-{discount}%</span>
@@ -31,7 +33,7 @@ function ProductCard({
         >
           <ChartNoAxesColumn size={16} />
         </button>
-      </div>
+      </Link>
 
       <div className="product-content">
         <div className="product-category-rating">
@@ -42,9 +44,9 @@ function ProductCard({
           </div>
         </div>
 
-        <div className="product-title">
+        <Link to={`/products/${id}`} className="product-title">
           <h3>{title}</h3>
-        </div>
+        </Link>
 
         <div className="product-footer ">
           <div className="product-price">

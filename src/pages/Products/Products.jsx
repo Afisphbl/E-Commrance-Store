@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { fetchProducts } from "../../api/productApi";
 import { PAGE_SIZE, SORT_OPTIONS } from "../../utils/constant";
 
 import FilterSidebar from "../../components/FilterSidebar/FilterSidebar";

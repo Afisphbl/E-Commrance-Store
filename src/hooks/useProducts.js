@@ -44,13 +44,16 @@ function reducer(state, action) {
             category: product.category,
             description: product.description,
             discount: product.discountPercentage ?? 0,
-            image: product.thumbnail ?? "",
+            image: product.images?.[0] ?? "",
             price: product.price,
             rating: product.rating,
             reviews: product.reviews ?? [],
             title: product.title,
             warranty:
               product.warrantyInformation ?? "No warranty for this product",
+
+            availability: product.availabilityStatus ?? "Unknown",
+            stock: product.stock ?? 0,
           };
         },
       );
