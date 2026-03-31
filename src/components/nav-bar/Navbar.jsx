@@ -14,11 +14,13 @@ import {
 import "./Navbar.css";
 import { useState } from "react";
 import { useWishlist } from "../../hooks/useWishlist";
+import { useCart } from "../../hooks/useCart";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { wishlist } = useWishlist();
+  const { cartState } = useCart();
   return (
     <div className="navbar-container">
       {mobileMenuOpen && (
@@ -81,20 +83,32 @@ function Navbar() {
             {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
 
-          <NavLink className="icon-btn nav-icon" to="/wishlist">
+          <NavLink
+            className="icon-btn nav-icon"
+            to="/wishlist"
+            title="Wishlists"
+          >
             <Heart size={20} />
             {wishlist.length > 0 && (
               <span className="badge">{wishlist.length}</span>
             )}
           </NavLink>
 
-          <button className="icon-btn nav-icon">
+          <button className="icon-btn nav-icon" title="Compare products">
             <ChartNoAxesColumn size={20} />
           </button>
 
-          <button className="icon-btn nav-icon">
+          <NavLink
+            className="icon-btn nav-icon"
+            to="/cart"
+            title="Shopping Cart"
+          >
             <ShoppingCart size={20} />
-          </button>
+
+            {cartState.items.length > 0 && (
+              <span className="badge">{cartState.totalQuantity}</span>
+            )}
+          </NavLink>
 
           <button
             className="icon-btn mobile-toggle nav-icon"

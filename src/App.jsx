@@ -6,17 +6,20 @@ import Navbar from "./components/nav-bar/Navbar";
 import Footer from "./components/Footer/Footer";
 import AppRoutes from "./routes/AppRoutes";
 import { WishlistProvider } from "./context/WishlistContext";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
     <ThemeProvider>
-      <WishlistProvider>
-        <BrowserRouter>
-          <Navbar />
-          <AppRoutes />
-          <Footer />
-        </BrowserRouter>
-      </WishlistProvider>
+      <CartProvider>
+        <WishlistProvider>
+          <BrowserRouter>
+            <Navbar />
+            <AppRoutes />
+            <Footer />
+          </BrowserRouter>
+        </WishlistProvider>
+      </CartProvider>
     </ThemeProvider>
   );
 }

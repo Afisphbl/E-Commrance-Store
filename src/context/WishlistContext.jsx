@@ -107,7 +107,7 @@ export const WishlistProvider = ({ children }) => {
         reviews: data.reviews ?? [],
         title: data.title,
         warranty: data.warrantyInformation ?? "No warranty for this product",
-
+        quantity: 1,
         availability: data.availabilityStatus ?? "Unknown",
         stock: data.stock ?? 0,
         isInWishlist: true,
