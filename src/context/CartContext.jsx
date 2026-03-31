@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import { API_BASE_URL } from "../utils/constant";
-import { currencyCalculator, formatPrice } from "../utils/helper";
+import { currencyCalculator } from "../utils/helper";
 
 export const CartContext = createContext();
 
@@ -9,6 +9,7 @@ const initialCartState = {
   totalQuantity: 0,
   totalAmount: 0,
   shipping: 0,
+  error: null,
 };
 
 function cartReducer(state, action) {
@@ -54,11 +55,14 @@ function cartReducer(state, action) {
         (sum, item) => sum + item.totalPrice,
         0,
       );
+
+      const shippingCost = sumTotalAmount > 100 ? 0 : 10;
       return {
         ...state,
         items: updatedItems,
         totalQuantity: sumTotalQuantity,
         totalAmount: sumTotalAmount,
+        shipping: shippingCost,
       };
     }
 
@@ -68,8 +72,10 @@ function cartReducer(state, action) {
           ? {
               ...item,
               quantity: Math.max(0, item.quantity - action.payload.qtn),
-              totalPrice:
+              totalPrice: Math.max(
+                0,
                 item.totalPrice - item.currentPrice * action.payload.qtn,
+              ),
             }
           : item,
       );
@@ -89,6 +95,7 @@ function cartReducer(state, action) {
           items: [],
           totalQuantity: 0,
           totalAmount: 0,
+          shipping: 0,
         };
       }
 
@@ -138,6 +145,13 @@ function cartReducer(state, action) {
         totalQuantity: 0,
         totalAmount: 0,
         shipping: 0,
+      };
+    }
+
+    case "ERROR": {
+      return {
+        ...state,
+        error: action.payload,
       };
     }
 

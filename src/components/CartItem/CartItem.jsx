@@ -5,19 +5,16 @@ import { useState } from "react";
 import { useCart } from "../../hooks/useCart";
 import { formatPrice } from "../../utils/helper";
 function CartItem({ id, title, image, quantity, currentPrice, totalPrice }) {
-  const [quantityCart, setQuantityCart] = useState(quantity);
   const formattedCurrentPrice = formatPrice(currentPrice);
   const formattedTotalPrice = formatPrice(totalPrice);
   const { addItemToCart, subQuantityFromCart, removeItemFromCart } = useCart();
 
   function handleAddQuantity() {
-    setQuantityCart((prev) => prev + 1);
     addItemToCart(id, 1);
   }
 
   function handleSubQuantity() {
-    if (quantityCart > 0) {
-      setQuantityCart((prev) => prev - 1);
+    if (quantity > 1) {
       subQuantityFromCart(id, 1);
     }
   }
@@ -39,7 +36,7 @@ function CartItem({ id, title, image, quantity, currentPrice, totalPrice }) {
           <button className="quantity-btn" onClick={handleSubQuantity}>
             -
           </button>
-          <span className="quantity-display">{quantityCart}</span>
+          <span className="quantity-display">{quantity}</span>
           <button className="quantity-btn" onClick={handleAddQuantity}>
             +
           </button>

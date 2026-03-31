@@ -167,7 +167,8 @@ function ProductDetails() {
             <div className="buttons-group">
               <button
                 className="btn-primary flex-1"
-                onClick={() => addItemToCart(product.id, quantity)}
+                onClick={() => product && addItemToCart(product.id, quantity)}
+                disabled={!product}
               >
                 Add to Cart
               </button>
