@@ -6,6 +6,7 @@ export const CartContext = createContext();
 
 const initialCartState = {
   items: [],
+  orders: [],
   totalQuantity: 0,
   totalAmount: 0,
   shipping: 0,
@@ -63,6 +64,28 @@ function cartReducer(state, action) {
         totalQuantity: sumTotalQuantity,
         totalAmount: sumTotalAmount,
         shipping: shippingCost,
+      };
+    }
+
+    case "ADD_ORDER": {
+      const orderId = `ORD-${Date.now()}`;
+      const date = new Date().toLocaleDateString();
+      const shippingInfo = action.payload;
+      const order = {
+        orderId,
+        date,
+        items: state.items,
+        total: state.totalAmount,
+        shippingInfo,
+      };
+      return {
+        ...state,
+        orders: [...state.orders, order],
+        items: [],
+        totalQuantity: 0,
+        totalAmount: 0,
+        shipping: 0,
+        error: null,
       };
     }
 
@@ -200,6 +223,10 @@ export const CartProvider = ({ children }) => {
     }
   }
 
+  function addOrder(shippingInfo) {
+    dispatch({ type: "ADD_ORDER", payload: { ...shippingInfo } });
+  }
+
   function subQuantityFromCart(id, qtn = 1) {
     dispatch({ type: "SUB_QUANTITY", payload: { id, qtn } });
   }
@@ -215,6 +242,7 @@ export const CartProvider = ({ children }) => {
   const value = {
     cartState,
     addItemToCart,
+    addOrder,
     subQuantityFromCart,
     removeItemFromCart,
     clearCart,
