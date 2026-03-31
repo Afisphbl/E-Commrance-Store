@@ -2,6 +2,7 @@ import { ChartNoAxesColumn, Heart, ShoppingCart, Star } from "lucide-react";
 import "./ProductCard.css";
 import { Link } from "react-router";
 import { useWishlist } from "../../hooks/useWishlist";
+import { useCart } from "../../hooks/useCart";
 
 function ProductCard({
   id,
@@ -14,6 +15,7 @@ function ProductCard({
   originalPrice,
 }) {
   const { wishlist, addToWishlist } = useWishlist();
+  const { addItemToCart } = useCart();
   const isInWishlist = wishlist.some((item) => item.id === id);
   return (
     <div className="product-card">
@@ -73,6 +75,7 @@ function ProductCard({
             type="button"
             className="add-to-cart-btn"
             aria-label="Add to cart"
+            onClick={() => addItemToCart(id)}
           >
             <ShoppingCart size={16} />
           </button>
