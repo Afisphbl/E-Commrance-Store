@@ -44,9 +44,7 @@ function OrderCard({ order }) {
 
         <div>
           <p className="order-header-label">Date:</p>
-          <p className="order-date">
-            {new Date(order.date).toLocaleDateString()}
-          </p>
+          <p className="order-date">{order.date}</p>
         </div>
 
         <div>
@@ -71,7 +69,7 @@ function OrderItem({ item }) {
   return (
     <div className="order-item">
       <div className="order-item-img">
-        <img src={item.image} alt={item.name} />
+        <img src={item.image} alt={item.title} />
       </div>
 
       <div className="order-item-info">

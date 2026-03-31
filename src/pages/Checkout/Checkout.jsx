@@ -3,7 +3,7 @@ import "./Checkout.css";
 import { CircleCheckBigIcon, CreditCard, MapPin, Package } from "lucide-react";
 import { useCart } from "../../hooks/useCart";
 import { formatPrice } from "../../utils/helper";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
 
 const CHECKOUT_STEPS = [
@@ -172,11 +172,8 @@ function Checkout() {
 
       <div className="checkout-progress">
         {CHECKOUT_STEPS.map((step, index) => (
-          <>
-            <div
-              className={`step ${steps >= index ? "active" : ""}`}
-              key={step.id}
-            >
+          <Fragment key={step.id}>
+            <div className={`step ${steps >= index ? "active" : ""}`}>
               <div className="step-icon">{step.icon}</div>
               {step.name}
             </div>
@@ -185,7 +182,7 @@ function Checkout() {
                 className={`step-line ${steps > index ? "active" : ""}`}
               ></div>
             )}
-          </>
+          </Fragment>
         ))}
       </div>
 

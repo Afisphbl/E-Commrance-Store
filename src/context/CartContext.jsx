@@ -75,7 +75,8 @@ function cartReducer(state, action) {
         orderId,
         date,
         items: state.items,
-        total: state.totalAmount,
+        total: state.totalAmount + state.shipping,
+        shipping: state.shipping,
         shippingInfo,
       };
       return {
