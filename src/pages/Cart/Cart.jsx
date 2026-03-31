@@ -72,7 +72,9 @@ function Cart() {
               </div>
             </div>
 
-            <button className="btn-primary w-full">Proceed to Checkout</button>
+            <Link to="/checkout" className="btn-primary w-full">
+              Proceed to Checkout
+            </Link>
           </div>
         </div>
       </div>
