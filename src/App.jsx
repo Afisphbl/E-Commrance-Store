@@ -7,17 +7,20 @@ import Footer from "./components/Footer/Footer";
 import AppRoutes from "./routes/AppRoutes";
 import { WishlistProvider } from "./context/WishlistContext";
 import { CartProvider } from "./context/CartContext";
+import { CompareProvider } from "./context/CompareContext";
 
 function App() {
   return (
     <ThemeProvider>
       <CartProvider>
         <WishlistProvider>
-          <BrowserRouter>
-            <Navbar />
-            <AppRoutes />
-            <Footer />
-          </BrowserRouter>
+          <CompareProvider>
+            <BrowserRouter>
+              <Navbar />
+              <AppRoutes />
+              <Footer />
+            </BrowserRouter>
+          </CompareProvider>
         </WishlistProvider>
       </CartProvider>
     </ThemeProvider>

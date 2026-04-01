@@ -3,6 +3,7 @@ import "./ProductCard.css";
 import { Link } from "react-router";
 import { useWishlist } from "../../hooks/useWishlist";
 import { useCart } from "../../hooks/useCart";
+import { useCompare } from "../../hooks/useCompare";
 
 function ProductCard({
   id,
@@ -13,10 +14,30 @@ function ProductCard({
   discount,
   currentPrice,
   originalPrice,
+  brand,
+  stock,
+  returnPolicy,
+  warranty,
 }) {
   const { wishlist, addToWishlist } = useWishlist();
+  const { compareproducts, addToCompare } = useCompare();
   const { addItemToCart } = useCart();
   const isInWishlist = wishlist.some((item) => item.id === id);
+  const isInCompare = compareproducts.some((item) => item.id === id);
+
+  const product = {
+    id,
+    image,
+    title,
+    brand,
+    category,
+    originalPrice,
+    rating,
+    stock,
+    returnPolicy,
+    warranty,
+    action: "Buy Now",
+  };
   return (
     <div className="product-card">
       <div className="product-image-wrapper">
@@ -45,8 +66,13 @@ function ProductCard({
 
         <button
           type="button"
-          className="compare-btn"
+          className={`compare-btn ${isInCompare ? "active" : ""}`}
           aria-label="Compare product"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            addToCompare(product);
+          }}
         >
           <ChartNoAxesColumn size={16} />
         </button>

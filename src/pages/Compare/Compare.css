@@ -1,0 +1,208 @@
+.compare-page {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.compare-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}
+
+.compare-empty-content {
+  text-align: center;
+  max-width: 400px;
+}
+
+.compare-empty-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--foreground);
+}
+
+.compare-empty-content p {
+  color: var(--muted-foreground);
+  margin-bottom: 2rem;
+}
+
+.compare-header {
+  margin-bottom: 2rem;
+}
+
+.compare-table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.feature-label-cell {
+  background-color: var(--muted);
+  width: 200px;
+  text-align: left !important;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.product-cell {
+  width: calc((100% - 200px) / 4);
+  vertical-align: top;
+}
+
+.product-cell.empty {
+  color: var(--muted-foreground);
+  background-color: color-mix(in srgb, var(--background) 50%, var(--card));
+}
+
+.compare-product-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.remove-item {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--destructive);
+  color: var(--destructive-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.23s;
+}
+
+.remove-item:hover {
+  transform: scale(1.1);
+}
+
+.compare-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background-color: var(--white);
+  mix-blend-mode: multiply;
+  border-radius: var(--radius-md);
+}
+
+:root[data-theme="dark"] .compare-img {
+  mix-blend-mode: normal;
+}
+
+.compare-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--foreground);
+  text-decoration: none;
+  min-height: 2.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.feature-label {
+  background-color: var(--muted);
+  font-weight: 600;
+  color: var(--foreground);
+  text-align: left !important;
+}
+
+.empty-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.empty-slot p {
+  font-size: 0.8125rem;
+}
+
+.feature-value {
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+.feature-value.empty {
+  background-color: color-mix(in srgb, var(--background) 20%, var(--card));
+}
+
+.inline-star {
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+
+.btn-text {
+  color: var(--muted-foreground);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.btn-text:hover {
+  color: var(--destructive);
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem !important;
+}
+
+@media (max-width: 768px) {
+  .compare-table {
+    min-width: 600px;
+  }
+  .feature-label-cell {
+    width: 100px;
+    font-size: 0.65rem;
+    padding: 1rem 0.5rem;
+  }
+  .compare-table th,
+  .compare-table td {
+    padding: 1rem 0.5rem;
+  }
+  .compare-img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .compare-table-container::after {
+    content: "Scroll horizontally to view more →";
+    display: block;
+    padding: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--primary);
+    text-align: center;
+    background-color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+}

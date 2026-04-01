@@ -15,11 +15,13 @@ import "./Navbar.css";
 import { useState } from "react";
 import { useWishlist } from "../../hooks/useWishlist";
 import { useCart } from "../../hooks/useCart";
+import { useCompare } from "../../hooks/useCompare";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { wishlist } = useWishlist();
+  const { compareproducts } = useCompare();
   const { cartState } = useCart();
   return (
     <div className="navbar-container">
@@ -94,9 +96,16 @@ function Navbar() {
             )}
           </NavLink>
 
-          <button className="icon-btn nav-icon" title="Compare products">
+          <NavLink
+            className="icon-btn nav-icon"
+            to="/compare"
+            title="Compare products"
+          >
+            {compareproducts.length > 0 && (
+              <span className="badge">{compareproducts.length}</span>
+            )}
             <ChartNoAxesColumn size={20} />
-          </button>
+          </NavLink>
 
           <NavLink
             className="icon-btn nav-icon"
