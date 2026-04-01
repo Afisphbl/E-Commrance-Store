@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Link } from "react-router";
 import "./Checkout.css";
 import { CircleCheckBigIcon, CreditCard, MapPin, Package } from "lucide-react";

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { ChartNoAxesColumn, Heart, ShoppingCart, Star } from "lucide-react";
 import "./ProductCard.css";
 import { Link } from "react-router";
@@ -5,7 +6,7 @@ import { useWishlist } from "../../hooks/useWishlist";
 import { useCart } from "../../hooks/useCart";
 import { useCompare } from "../../hooks/useCompare";
 
-function ProductCard({
+const ProductCard = memo(function ProductCard({
   id,
   image,
   category,
@@ -111,6 +112,6 @@ function ProductCard({
       </div>
     </div>
   );
-}
+});
 
 export default ProductCard;

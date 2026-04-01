@@ -1,29 +1,18 @@
-import { BrowserRouter, Route, Routes } from "react-router";
-import { ThemeProvider } from "./context/ThemeContext";
-import Home from "./pages/Home/Home";
-import Products from "./pages/Products/Products";
+import { BrowserRouter } from "react-router";
 import Navbar from "./components/nav-bar/Navbar";
 import Footer from "./components/Footer/Footer";
 import AppRoutes from "./routes/AppRoutes";
-import { WishlistProvider } from "./context/WishlistContext";
-import { CartProvider } from "./context/CartContext";
-import { CompareProvider } from "./context/CompareContext";
+import AppProviders from "./providers/AppProviders";
 
 function App() {
   return (
-    <ThemeProvider>
-      <CartProvider>
-        <WishlistProvider>
-          <CompareProvider>
-            <BrowserRouter>
-              <Navbar />
-              <AppRoutes />
-              <Footer />
-            </BrowserRouter>
-          </CompareProvider>
-        </WishlistProvider>
-      </CartProvider>
-    </ThemeProvider>
+    <AppProviders>
+      <BrowserRouter>
+        <Navbar />
+        <AppRoutes />
+        <Footer />
+      </BrowserRouter>
+    </AppProviders>
   );
 }
 

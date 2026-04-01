@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+  import { createContext, useReducer, useMemo, useCallback } from "react";
 import { API_BASE_URL } from "../utils/constant";
 import { currencyCalculator } from "../utils/helper";
 
@@ -68,9 +68,7 @@ function cartReducer(state, action) {
     }
 
     case "ADD_ORDER": {
-      const orderId = `ORD-${Date.now()}`;
-      const date = new Date().toLocaleDateString();
-      const shippingInfo = action.payload;
+      const { shippingInfo, orderId, date } = action.payload;
       const order = {
         orderId,
         date,
@@ -225,7 +223,14 @@ export const CartProvider = ({ children }) => {
   }
 
   function addOrder(shippingInfo) {
-    dispatch({ type: "ADD_ORDER", payload: { ...shippingInfo } });
+    dispatch({
+      type: "ADD_ORDER",
+      payload: {
+        shippingInfo,
+        orderId: `ORD-${Date.now()}`,
+        date: new Date().toLocaleDateString(),
+      },
+    });
   }
 
   function subQuantityFromCart(id, qtn = 1) {

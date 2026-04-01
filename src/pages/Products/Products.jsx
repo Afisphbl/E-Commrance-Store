@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { PAGE_SIZE, SORT_OPTIONS } from "../../utils/constant";
 
 import FilterSidebar from "../../components/FilterSidebar/FilterSidebar";
@@ -30,12 +30,16 @@ function Products() {
     fetchIntialData();
   }, [fetchIntialData]);
 
+  const handleSidebarClick = useCallback((e) => e.stopPropagation(), []);
+  const closeFilter = useCallback(() => setFilterOpen(false), []);
+  const toggleFilter = useCallback(() => setFilterOpen((prev) => !prev), []);
+
   return (
     <article className="products-page">
       <div className="mobile-filter-bar container">
         <button
           className="btn-filter"
-          onClick={() => setFilterOpen((prev) => !prev)}
+          onClick={toggleFilter}
         >
           <Funnel size={16} />
           <span>Filter</span>
@@ -43,11 +47,11 @@ function Products() {
       </div>
       <main
         className="products-layout container"
-        onClick={() => setFilterOpen(false)}
+        onClick={closeFilter}
       >
         <section
           className={`sidebar-container ${filterOpen ? "open" : ""}`}
-          onClick={(e) => e.stopPropagation()}
+          onClick={handleSidebarClick}
         >
           <FilterSidebar
             categories={categories}

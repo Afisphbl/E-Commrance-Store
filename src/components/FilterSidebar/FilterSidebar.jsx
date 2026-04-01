@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { formatPrice } from "../../utils/helper";
 import "./FilterSidebar.css";
 
-function FilterSidebar({
+const FilterSidebar = memo(function FilterSidebar({
   categories,
   selectedCategory,
   selectedPrice = 2500,
@@ -74,6 +75,6 @@ function FilterSidebar({
       </button>
     </section>
   );
-}
+});
 
 export default FilterSidebar;
