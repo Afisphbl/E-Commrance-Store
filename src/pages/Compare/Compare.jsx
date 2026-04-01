@@ -80,8 +80,8 @@ function TableHeader({ products, removeFromCompare }) {
         {Array.from({ length: emptyColumnsCount }).map((_, index) => (
           <th key={`empty-${index}`} className="product-cell empty">
             Add more to compare
-            <Link to="/products">
-              <button className="btn-secondary">Add</button>
+            <Link to="/products" className="btn-secondary">
+              Add
             </Link>
           </th>
         ))}
@@ -116,7 +116,7 @@ function TableBody({ products }) {
             <td key={product.id} className="feature-value">
               {feature.key === "action" ? (
                 <button className="btn btn-primary">Add to Cart</button>
-              ) : product[feature.key] ? (
+              ) : product[feature.key] != null ? (
                 feature.key === "rating" ? (
                   <span
                     style={{

@@ -67,7 +67,9 @@ function ProductCard({
         <button
           type="button"
           className={`compare-btn ${isInCompare ? "active" : ""}`}
-          aria-label="Compare product"
+          aria-label={
+            isInCompare ? "Remove from comparison" : "Add to comparison"
+          }
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();

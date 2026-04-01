@@ -110,6 +110,7 @@ export const WishlistProvider = ({ children }) => {
         quantity: 1,
         availability: data.availabilityStatus ?? "Unknown",
         stock: data.stock ?? 0,
+        returnPolicy: data.returnPolicy ?? "No return policy for this product",
         isInWishlist: true,
       };
       dispatch({ type: "ADD_TO_WISHLIST", payload: product });

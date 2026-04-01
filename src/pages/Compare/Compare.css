@@ -192,6 +192,9 @@
     width: 80px;
     height: 80px;
   }
+  .product-cell {
+    width: calc((100% - 100px) / 4);
+  }
 }
 
 @media (max-width: 480px) {

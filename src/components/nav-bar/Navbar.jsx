@@ -101,10 +101,10 @@ function Navbar() {
             to="/compare"
             title="Compare products"
           >
+            <ChartNoAxesColumn size={20} />
             {compareproducts.length > 0 && (
               <span className="badge">{compareproducts.length}</span>
             )}
-            <ChartNoAxesColumn size={20} />
           </NavLink>
 
           <NavLink

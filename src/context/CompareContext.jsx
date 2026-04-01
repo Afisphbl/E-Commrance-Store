@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useMemo, useCallback } from "react";
 
 export const CompareContext = createContext();
 
@@ -22,7 +22,6 @@ const compareReducer = (state, action) => {
       }
 
       if (state.compareproducts.length >= 4) {
-        alert("You can only compare up to 4 products.");
         return state;
       }
       return {
@@ -57,24 +56,26 @@ export function CompareProvider({ children }) {
     initialCompareState,
   );
 
-  function addToCompare(product) {
+  const addToCompare = useCallback((product) => {
     dispatch({ type: "ADD_TO_COMPARE", payload: product });
-  }
+  }, []);
 
-  function removeFromCompare(productId) {
+  const removeFromCompare = useCallback((productId) => {
     dispatch({ type: "REMOVE_FROM_COMPARE", payload: productId });
-  }
+  }, []);
 
-  function clearCompare() {
+  const clearCompare = useCallback(() => {
     dispatch({ type: "CLEAR_COMPARE" });
-  }
+  }, []);
 
-  const value = {
-    compareproducts,
-    addToCompare,
-    removeFromCompare,
-    clearCompare,
-  };
+  const value = useMemo(() => {
+    return {
+      compareproducts,
+      addToCompare,
+      removeFromCompare,
+      clearCompare,
+    };
+  }, [compareproducts, addToCompare, removeFromCompare, clearCompare]);
 
   return (
     <CompareContext.Provider value={value}>{children}</CompareContext.Provider>
