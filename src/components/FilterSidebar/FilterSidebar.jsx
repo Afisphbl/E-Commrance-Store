@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { X } from "lucide-react";
 import { formatPrice } from "../../utils/helper";
 import "./FilterSidebar.css";
 
@@ -9,11 +10,19 @@ const FilterSidebar = memo(function FilterSidebar({
   setCategory,
   setPrice,
   resetFilters,
+  onClose,
 }) {
   return (
     <section className="filter-sidebar">
       <div className="filter-header">
         <h3>Filters</h3>
+        <button
+          className="close-filter-btn"
+          onClick={onClose}
+          aria-label="Close filters"
+        >
+          <X size={20} />
+        </button>
       </div>
 
       <div className="filter-section">

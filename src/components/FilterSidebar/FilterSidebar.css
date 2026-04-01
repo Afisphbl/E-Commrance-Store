@@ -28,6 +28,22 @@
   color: var(--muted-foreground);
   line-height: 1;
   display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.close-filter-btn:hover {
+  color: var(--foreground);
+}
+
+@media (max-width: 900px) {
+  .close-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .filter-section {

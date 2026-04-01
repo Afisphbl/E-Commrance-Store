@@ -37,18 +37,12 @@ function Products() {
   return (
     <article className="products-page">
       <div className="mobile-filter-bar container">
-        <button
-          className="btn-filter"
-          onClick={toggleFilter}
-        >
+        <button className="btn-filter" onClick={toggleFilter}>
           <Funnel size={16} />
           <span>Filter</span>
         </button>
       </div>
-      <main
-        className="products-layout container"
-        onClick={closeFilter}
-      >
+      <main className="products-layout container" onClick={closeFilter}>
         <section
           className={`sidebar-container ${filterOpen ? "open" : ""}`}
           onClick={handleSidebarClick}
@@ -60,6 +54,7 @@ function Products() {
             setCategory={setCategory}
             setPrice={setPrice}
             resetFilters={resetFilters}
+            onClose={closeFilter}
           />
         </section>
 

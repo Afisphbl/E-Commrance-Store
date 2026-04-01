@@ -61,6 +61,10 @@
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
+  position: sticky;
+  left: 0;
+  z-index: 100;
+  box-shadow: 1px 0 0 0 var(--border);
 }
 
 .product-cell {
@@ -133,6 +137,10 @@
   font-weight: 600;
   color: var(--foreground);
   text-align: left !important;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  box-shadow: 1px 0 0 0 var(--border);
 }
 
 .empty-slot {
@@ -177,7 +185,7 @@
 
 @media (max-width: 768px) {
   .compare-table {
-    min-width: 600px;
+    min-width: auto;
   }
   .feature-label-cell {
     width: 100px;
@@ -193,7 +201,12 @@
     height: 80px;
   }
   .product-cell {
-    width: calc((100% - 100px) / 4);
+    width: auto;
+    min-width: 120px;
+  }
+  .product-cell.empty,
+  .feature-value.empty {
+    display: none;
   }
 }
 
