@@ -54,6 +54,8 @@ function reducer(state, action) {
 
             availability: product.availabilityStatus ?? "Unknown",
             stock: product.stock ?? 0,
+            returnPolicy:
+              product.returnPolicy ?? "No return policy for this product",
           };
         },
       );
