@@ -64,22 +64,48 @@ A modern, high-performance E-Commerce frontend application built with React 19, 
   <img src="./screenshots/products/products-pagination.png" width="45%" />
 </p>
 
-### Cart & Checkout
+### Orders
 
 <p align "center">
-  <img src="./screenshots/cart/cart-page.png" width="18%" />
+  <img src="./screenshots/orders/order-page.png" width="45%" />
+  <img src="./screenshots/orders/Order-empty-page.png" width="45%" />
+</p>
+
+### Product Details
+
+<p align "center">
+  <img src="./screenshots/product-detail/product-detail.png" width="45%" />
+  <img src="./screenshots/product-detail/product-detail-review.png" width="45%" />
+
+### Wishlist
+
+<p align "center">
+  <img src="./screenshots/wishlist/wishlist.png" width="45%" />
+  <img src="./screenshots/wishlist/wishlist-empty-page.png" width="45%" />
+</p>
+
+### Compare
+
+<p align "center">
+  <img src="./screenshots/compare/compare-page.png" width="45%" />
+  <img src="./screenshots/compare/compare-empty-page.png" width="45%" />
+</p>
+
+### Cart
+
+<p align "center">
+  <img src="./screenshots/cart/cart-page.png" width="45%" />
+  <img src="./screenshots/cart/cart-empty-page.png" width="45%" />
+</p>
+
+### Checkout
+
+<p align "center">
   <img src="./screenshots/checkout/checkout-personal-info-page.png" width="18%" />
+  <img src="./screenshots/checkout/checkout-personal-info1-page.png" width="18%" />
   <img src="./screenshots/checkout/checkout-payment-page.png" width="18%" />
   <img src="./screenshots/checkout/checkout-review-page.png" width="18%" />
   <img src="./screenshots/checkout/checkout-order-success-page.png" width="18%" />
-</p>
-
-### Compare & Wishlist & Orders
-
-<p align "center">
-  <img src="./screenshots/compare/compare-page.png" width="30%" />
-  <img src="./screenshots/wishlist/wishlist" width="30%" />
-  <img src="./screenshots/orders/order-page.png" width="30%" />
 </p>
 
 ## Installation Setup
